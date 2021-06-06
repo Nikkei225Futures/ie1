@@ -1,0 +1,4 @@
+os.name:Windows 10
+file.encoding:MS932
+java.version:11.0.7
+user.dir:G:\programing\java

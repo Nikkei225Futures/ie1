@@ -1,0 +1,241 @@
+課題1 Lesson04_1.java
+public class Lesson04_1 {
+  public static void main(String args[]) {
+    // add here
+    Num calc = new Num();
+    calc.add(5, 7);
+    calc.add(12, 88);
+    calc.sub(10, 3);
+    calc.sub(2, 20);
+  }
+}
+
+結果1
+G:\programing\java\Lesson04>java Lesson04_1
+5 + 7 = 12
+12 + 88 = 100
+10 - 3 = 7
+2 - 20 = -18
+
+課題2 Lesson04_2
+public class Lesson04_2 {
+  public static void main(String args[]) {
+    Num n = new Num();
+    n.mul(2, 15);
+    n.mul(20, 20);
+    n.div(10, 5);
+    n.div(899, 0);
+    n.rem(15, 7);
+    n.rem(54, 0);
+  }
+}
+
+結果2
+G:\programing\java\Lesson04>java Lesson04_2
+2 * 15 = 30
+20 * 20 = 400
+10.0 / 5.0 = 2.0
+899.0 / 0.0はゼロ除算です.
+15 % 7 = 1
+54 % 0はゼロ除算です.
+
+課題3 Lesson04_3
+public class Lesson04_3 {
+  public static void main(String args[]) {
+    //インスタンスの生成
+    Calculation c = new Calculation();
+    int number = Integer.parseInt(args[0]);
+    c.number = number;
+    c.printSqu();
+    c.printFac();
+  }
+}
+
+結果3 
+G:\programing\java\Lesson04>java Lesson04_3 5
+square: 25.0
+factorial: 120
+
+G:\programing\java\Lesson04>java Lesson04_3  10
+square: 100.0
+factorial: 3628800
+
+G:\programing\java\Lesson04>java Lesson04_3  7
+square: 49.0
+factorial: 5040
+
+課題4 Lesson04_4
+public class Lesson04_4 {
+  public static void main(String[] args) {
+    int left = Integer.parseInt(args[0]);
+    int right = Integer.parseInt(args[1]);
+    // add here
+    Binary bin = new Binary();
+    bin.num1 = left;
+    bin.num2 = right;
+
+    int and = bin.and();
+    int exOR = bin.exclusiveOR();
+
+    System.out.println("AND: " + and);
+    System.out.println("Exclusive OR: " + exOR);
+  }
+}
+
+結果4
+G:\programing\java\Lesson04>java Lesson04_4 1 2
+AND: 0
+Exclusive OR: 11
+
+G:\programing\java\Lesson04>java Lesson04_4 16 32
+AND: 0
+Exclusive OR: 110000
+
+G:\programing\java\Lesson04>java Lesson04_4 1 1
+AND: 1
+Exclusive OR: 0
+
+課題5 Lesson04_5
+public class Lesson04_5{
+  public static void main(String args[]){
+    int[] even = {0, 2, 4, 6, 8, 10};
+    int[] odd = {1, 3, 5, 7, 9, 11};
+
+    // add here
+    CalArray ev = new CalArray();
+    ev.name = "Even";
+    ev.add(even);
+    ev.mul(even);
+    ev.output();
+    CalArray od = new CalArray();
+    od.name = "Odd";
+    od.add(odd);
+    od.mul(odd);
+    od.output();
+    CalArray evod = new CalArray();
+    evod.name = "Even & Odd";
+    evod.add(even);
+    evod.add(odd);
+    evod.mul(even);
+    evod.mul(odd);
+    evod.output();
+  }
+}
+
+結果5
+G:\programing\java\Lesson04>java Lesson04_5
+ [ Even ]
+sum : 30
+mul : 0
+ [ Odd ]
+sum : 36
+mul : 10395
+ [ Even & Odd ]
+sum : 66
+mul : 0
+
+Num.java
+public class Num {
+  public void add(int num1, int num2) {
+    int add_num = num1 + num2;
+    System.out.println(num1 + " + " + num2 + " = " + add_num);
+  }
+
+  public void sub(int num1, int num2) {
+    int sub_num = num1 - num2;
+    System.out.println(num1 + " - " + num2 + " = " + sub_num);
+  }
+
+  // add here (Lesson04_2)
+  public void mul(int num1, int num2) {
+    int mul_num = num1 * num2;
+    System.out.println(num1 + " * " + num2 + " = " + mul_num);
+  }
+
+  public void div(float num1, float num2) {
+    if (num2 == 0) {
+      System.out.println(num1 + " / " + num2 + "はゼロ除算です.");
+    } else {
+      float div_num = num1 / num2;
+      System.out.println(num1 + " / " + num2 + " = " + div_num);
+    }
+  }
+
+  public void rem(int num1, int num2) {
+    if (num2 == 0) {
+      System.out.println(num1 + " % " + num2 + "はゼロ除算です.");
+    } else {
+      int rem_num = num1 % num2;
+      System.out.println(num1 + " % " + num2 + " = " + rem_num);
+    }
+  }
+}
+
+Calculation.java
+public class Calculation {
+  int number;
+  // add here
+
+  public void printSqu() {
+    float square = number * number;
+    System.out.println("square: " + square);
+  }
+
+  public void printFac() {
+    int factorial = 1;
+    for(int i = 1; i <= number; i++){
+      factorial *= i;
+    }
+    System.out.println("factorial: " + factorial);
+  }
+
+}
+
+Binary.java
+public class Binary {
+  // add here
+  int num1, num2;
+
+  
+  public int and() {
+    int and = num1 & num2;
+    String andBin = Integer.toBinaryString(and);
+    and = Integer.parseInt(andBin);
+    return and;
+  }
+
+  public int exclusiveOR(){
+    int exOR = num1 ^ num2;
+    String exORBin = Integer.toBinaryString(exOR);
+    exOR = Integer.parseInt(exORBin);
+    return exOR;
+  }
+}
+
+CalArray.java
+public class CalArray {
+  String name;
+  private int sum = 0;
+  private int mul = 1;
+
+  //name，sum，mulを表示する
+  public void output() {
+    System.out.println(" [ " + this.name + " ] ");
+    System.out.println("sum : " + this.sum);
+    System.out.println("mul : " + this.mul);
+  }
+
+  //呼び出されたときsumに数値を足していく
+  public void add(int[] array) {
+    for(int i = 0; i < array.length; i++){
+      this.sum = this.sum + array[i];
+    }
+  }
+
+  //呼び出されたときmulに数値をかけていく
+  public void mul(int[] array) {
+    for(int i = 0; i < array.length; i++){
+      this.mul = this.mul * array[i];
+    }
+  }
+}

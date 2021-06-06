@@ -1,0 +1,213 @@
+課題1　プログラム
+public class Lesson05_1{
+	public static void main(String[] args) {
+		int[] arr = new int[args.length];
+		for (int i = 0; i < arr.length; i++) {
+			arr[i]=Integer.parseInt(args[i]);
+		}
+		ArrayCal cal = new ArrayCal();
+		cal.name="Array";
+		cal.add(arr);
+		cal.mul(arr);
+		cal.output();
+		return ;
+	}
+}
+
+課題1　結果
+G:\programing\java\Lesson05>java Lesson05_1 1 2 3 4 5
+ [ Array ]
+sum : 15
+mul : 120
+
+G:\programing\java\Lesson05>java Lesson05_1 6 8 7
+ [ Array ]
+sum : 21
+mul : 336
+
+
+課題2 プログラム
+public class Lesson05_2{
+	public static void main(String[] args) {
+		int num = Integer.parseInt(args[0]);
+		Num cal = new Num();
+		cal.num= Integer.parseInt(args[1]);
+		cal.add(num);
+		cal.mul(num);
+		return ;
+	}
+}
+
+課題2　結果
+G:\programing\java\Lesson05>java Lesson05_2 34 3
+34+3=37
+34*3=102
+
+G:\programing\java\Lesson05>java Lesson05_2 312 221
+312+221=533
+312*221=68952
+
+
+課題3　プログラム
+public class Lesson05_3{
+	public static void main(String[] args) {
+		Student student = new Student();
+		student.id = 1200999;
+		student.grade = 2;
+		student.name = "高知太郎";
+		student.printInfo();
+		return ;
+	}
+}
+
+課題3　結果
+G:\programing\java\Lesson05>java Lesson05_3
+*****************************
+学籍番号: 1200999
+学年: 2
+氏名: 高知太郎
+*****************************
+
+
+課題4　プログラム
+public class Lesson05_4 {
+
+    public static void main(String[] args) {
+      PersonalInfo p1 = new PersonalInfo("高知太郎", 22);
+
+      p1.printInfo();
+    }
+}
+
+課題4　結果
+G:\programing\java\Lesson05>java Lesson05_4
+name: 高知太郎, age: 22
+
+
+課題5　プログラム
+public class Lesson05_5 {
+
+    public static void main(String[] args) {
+
+      // ------ add here ---------------
+      PersonalInfo p1 = new PersonalInfo();
+      PersonalInfo p2 = new PersonalInfo("工科花子");
+      PersonalInfo p3 = new PersonalInfo(20);
+      PersonalInfo p4 = new PersonalInfo("高知太郎", 22);
+      p1.printInfo();
+      p2.printInfo();
+      p3.printInfo();
+      p4.printInfo();
+      // -------------------------------
+
+    }
+
+}
+
+課題5　結果
+G:\programing\java\Lesson05>java Lesson05_5
+name: 名無し, age: 0
+name: 工科花子, age: 0
+name: 名無し, age: 20
+name: 高知太郎, age: 22
+
+Num.java
+public class Num{
+	public int num=0;
+
+	public void add(int num){
+		int result;
+		//Add here--------------
+
+		result = this.num + num;
+		System.out.println(num + "+" + this.num + "=" + result);
+
+		//----------------------
+	}
+
+	public void mul(int num1){
+		int result;
+		//Add here--------------
+		
+		result = this.num * num1;
+		System.out.println(num1 + "*" + this.num + "=" + result);
+
+		//----------------------
+	}
+
+}
+
+ArrayCal.java
+public class ArrayCal{
+  String name;
+  private int sum = 0;
+  private int mul = 1;
+
+  public void output(){
+    System.out.println(" [ " + name + " ] ");
+    System.out.println("sum : " + sum);
+    System.out.println("mul : " + mul);
+  }
+
+  public void add(int[] array){
+    for(int i = 0; i < array.length; i++){
+      sum = sum + array[i];
+    }
+  }
+
+  public void mul(int[] array){
+    for(int i = 0; i < array.length; i++){
+      mul = mul * array[i];
+    }
+  }
+
+}
+
+Student.java
+public class Student {
+    public int id;
+    public int grade;
+    public String name;
+    
+    public void printInfo(){
+        System.out.println("*****************************");
+        System.out.println("学籍番号: " + this.id);
+        System.out.println("学年: " + this.grade);
+        System.out.println("氏名: " + this.name);
+        System.out.println("*****************************");
+    }
+    
+}
+
+PersonalInfo.java
+public class PersonalInfo {
+
+  String name;
+  int age;
+
+  // ----------- add here (Lesson05_4) ----------
+  public PersonalInfo(String n, int a){
+    this.name = n;
+    this.age = a;
+  }
+
+  // --------------------------------------
+  
+  // ----------- add here (Lesson05_5) ----------
+  public PersonalInfo(String n){
+    this(n, 0);
+  }
+
+  public PersonalInfo(int a){
+    this("名無し", a);
+  }
+
+  public PersonalInfo(){
+    this("名無し", 0);
+  }
+  //----------------------------------------
+
+  public void printInfo() {
+    System.out.println("name: " + name + ", age: " + age);
+  }
+}

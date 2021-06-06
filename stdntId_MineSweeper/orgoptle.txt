@@ -1,0 +1,40 @@
+    public void openTile(int x, int y, MineSweeperGUI gui) {
+        /* ----- ここから実装してください． ----- */
+
+        if(this.tileStats[y][x] == 2){  //クリックしたマスがflagなら何もしないで抜ける
+            return;
+
+        }else if(this.table[y][x] == -1){   //クリックしたマスが地雷なら負け->終了
+            
+            //最初に開けたマスが地雷ならリセット
+            if(this.openedTilesSum == 0){
+                this.resetGame();
+                this.openTile(x, y, gui);
+                return;
+            }
+            gui.setTextToTile(x, y, "*");
+            gui.lose();
+            this.openAllTiles(gui);
+        
+        
+        
+        }else{      //それ以外は、マスを開けてクリア判定をする。クリアなら終了
+            
+
+            gui.setTextToTile(x, y, String.valueOf(this.table[y][x]));
+            
+            //まだボタンをクリックしていないかつ、this.table[y][x]が0ならopenedTilesSumを+1 or openedTilesSum += this.table[y][x]
+            if(this.tileStats[y][x] == 0){
+                if(this.table[y][x] == 0) this.openedTilesSum++;
+                this.openedTilesSum += this.table[y][x];
+            }
+
+            this.tileStats[y][x] = 1;   //オープン状態にする
+
+            if(this.openedTilesSum == this.clearSum){
+                gui.win();
+            }
+            
+        }
+        
+    }

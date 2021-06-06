@@ -1,0 +1,407 @@
+課題1 プログラム insertionSort
+public void insertionSort() {
+    for (int i = 1; i < this.sort_array.length; i++) {
+      int j = i;
+      while (j >= 1 && this.sort_array[j] < this.sort_array[j - 1]) {
+        this.swap(j, j-1);
+        j--;
+      }
+    }
+  }
+
+結果1
+G:\programing\java\Lesson20>java Lesson20_1
+Check InsertionSort (Array size = 10)
+
+Array before sort: 2 9 7 4 3 10 5 1 6 8
+Array after sort: 1 2 3 4 5 6 7 8 9 10
+
+課題2-4 プログラム
+BubbleSort.java
+class BubbleSort {// フィールド
+    private int[] sort_array;
+    protected long timeStart;
+    protected long timeStop;
+    protected int assignCount = 0;
+    protected int compareCount = 0;
+
+    // コンストラクタ
+    private BubbleSort() {
+
+    }
+
+    public BubbleSort(int[] sort_array) {
+        this.sort_array = sort_array;
+    }
+
+    // メソッド
+    public void display() {
+        for (int i = 0; i < this.sort_array.length; i++)
+            System.out.print(this.sort_array[i] + " ");
+        System.out.println();
+    }
+
+    public void swap(int x, int y) {
+        int temp = this.sort_array[x];
+        this.sort_array[x] = this.sort_array[y];
+        this.sort_array[y] = temp;
+        this.assignCount += 3;
+    }
+
+    public void bubbleSort() {
+        for (int i = this.sort_array.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                // if (this.sort_array[j] > this.sort_array[j + 1]) {
+                if (this.compareValue(this.sort_array[j], this.sort_array[j + 1]) == 1) {
+                    this.swap(j, j + 1);
+                    // 途中経過を表示する場合は次行の//を削除//
+                    // this.display();
+                }
+            }
+        }
+    }
+
+    public boolean checkSort() {
+        for (int i = 1; i < this.sort_array.length; i++) {
+            if (this.sort_array[i] < this.sort_array[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void startTimer() {
+        this.timeStart = System.nanoTime();
+    }
+
+    public void stopTimer() {
+        this.timeStop = System.nanoTime();
+    }
+
+    public long getSortTime() {
+        return this.timeStop - this.timeStart;
+    }
+
+    public int getAssignCount() {
+        return this.assignCount;
+    }
+
+    protected int compareValue(int n1, int n2) {
+        this.compareCount++;
+        if (n1 > n2) {
+            return 1;
+        } else if (n1 < n2) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int getCompareCount() {
+        return this.compareCount;
+    }
+}
+
+SelectionSort.java
+class SelectionSort {
+    // フィールド
+    private int[] sort_array;
+    protected long timeStart;
+    protected long timeStop;
+    protected int assignCount = 0;
+    protected int compareCount = 0;
+
+    // コンストラクタ
+    private SelectionSort() {
+
+    }
+
+    public SelectionSort(int[] sort_array) {
+        this.sort_array = sort_array;
+    }
+
+    // メソッド
+    public void display() {
+        for (int i = 0; i < this.sort_array.length; i++)
+            System.out.print(this.sort_array[i] + " ");
+        System.out.println();
+    }
+
+    public void swap(int x, int y) {
+        int temp = this.sort_array[x];
+        this.sort_array[x] = this.sort_array[y];
+        this.sort_array[y] = temp;
+        this.assignCount += 3;
+    }
+
+    public void selectionSort() {
+        int out, in, min;
+        for (out = 0; out < this.sort_array.length - 1; out++) {
+            min = out;
+            for (in = out + 1; in < this.sort_array.length; in++) {
+                // if (this.sort_array[in] < this.sort_array[min]) {
+                if (this.compareValue(this.sort_array[in], this.sort_array[min]) == -1) {
+                    min = in;
+                }
+            }
+            this.swap(out, min);
+            // this.display() // 途中経過を表示
+        }
+    }
+
+    public boolean checkSort() {
+        for (int i = 1; i < this.sort_array.length; i++) {
+            if (this.sort_array[i] < this.sort_array[i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void startTimer() {
+        this.timeStart = System.nanoTime();
+    }
+
+    public void stopTimer() {
+        this.timeStop = System.nanoTime();
+    }
+
+    public long getSortTime() {
+        return this.timeStop - this.timeStart;
+    }
+
+    public int getAssignCount() {
+        return this.assignCount;
+    }
+
+    protected int compareValue(int n1, int n2) {
+        this.compareCount++;
+        if (n1 > n2) {
+            return 1;
+        } else if (n1 < n2) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int getCompareCount() {
+        return this.compareCount;
+    }
+}
+
+InsertionSort.java
+public class InsertionSort {
+  // フィールド
+  private int[] sort_array; // ソートする配列
+  protected long timeStart;  
+  protected long timeStop; 
+  protected int assignCount = 0;
+  protected int compareCount = 0;
+
+  // コンストラクタ
+  private InsertionSort() {
+  }
+
+  public InsertionSort(int[] sort_array) {
+    this.sort_array = sort_array;
+  }
+
+  // メソッド
+  public void display() {
+    for (int i = 0; i < this.sort_array.length; i++) {
+      System.out.print(this.sort_array[i] + " ");
+    }
+    System.out.println();
+  }
+
+  public void swap(int x, int y) {
+    int temp = this.sort_array[x];
+    this.sort_array[x] = this.sort_array[y];
+    this.sort_array[y] = temp;
+    this.assignCount += 3;
+  }
+
+  public void insertionSort() {
+    for (int i = 1; i < this.sort_array.length; i++) {
+      int j = i;
+      //while (j >= 1 && this.sort_array[j] < this.sort_array[j - 1]) {
+        while (j >= 1 && this.compareValue(this.sort_array[j], this.sort_array[j-1]) == -1){
+        this.swap(j, j-1);
+        j--;
+      }
+    }
+  }
+
+  public boolean checkSort(){
+    for(int i = 1; i < this.sort_array.length; i++){
+      if(this.sort_array[i] < this.sort_array[i-1]){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public void startTimer(){
+    this.timeStart = System.nanoTime();
+  }
+
+  public void stopTimer(){
+    this.timeStop = System.nanoTime();
+  }
+
+  public long getSortTime(){
+    return this.timeStop - this.timeStart;
+  }
+
+
+  public int getAssignCount(){
+    return this.assignCount;
+  }
+
+  protected int compareValue(int n1, int n2){
+    this.compareCount++;
+    if(n1 > n2){
+      return 1;
+    }else if(n1 < n2){
+      return -1;
+    }else{
+      return 0;
+    }
+  }
+
+  public int getCompareCount(){
+    return this.compareCount;
+  }
+}
+
+
+
+結果2
+G:\programing\java\Lesson20>java Lesson20_2
+=== ascending  =============================
+[0, 2, 9, 14, 21, 26, 32, 34, 39, 40, 40, 48, 51, 54, 60]
+- BubbleSort -
+0 2 9 14 21 26 32 34 39 40 40 48 51 54 60
+sort: true
+- SelectionSort -
+0 2 9 14 21 26 32 34 39 40 40 48 51 54 60
+sort: true
+- InsertionSort -
+0 2 9 14 21 26 32 34 39 40 40 48 51 54 60
+sort: true
+
+=== descending =============================
+[61, 61, 61, 52, 48, 47, 45, 37, 32, 27, 19, 12, 11, 6, 0]
+- BubbleSort -
+0 6 11 12 19 27 32 37 45 47 48 52 61 61 61
+sort: true
+- SelectionSort -
+0 6 11 12 19 27 32 37 45 47 48 52 61 61 61
+sort: true
+- InsertionSort -
+0 6 11 12 19 27 32 37 45 47 48 52 61 61 61
+sort: true
+
+=== random     =============================
+[24, 14, 38, 37, 27, 27, 1, 37, 35, 11, 27, 31, 5, 3, 9]
+- BubbleSort -
+1 3 5 9 11 14 24 27 27 27 31 35 37 37 38
+sort: true
+- SelectionSort -
+1 3 5 9 11 14 24 27 27 27 31 35 37 37 38
+sort: true
+- InsertionSort -
+1 3 5 9 11 14 24 27 27 27 31 35 37 37 38
+sort: true
+
+結果3
+G:\programing\java\Lesson20>java Lesson20_3
+=== ascending  =============================
+[0, 2, 9, 14, 21, 26, 32, 34, 39, 40, 40, 48, 51, 54, 60]
+- BubbleSort -
+0 2 9 14 21 26 32 34 39 40 40 48 51 54 60
+sort time: 0.0062[ms]
+- SelectionSort -
+0 2 9 14 21 26 32 34 39 40 40 48 51 54 60
+sort time: 0.0094[ms]
+- InsertionSort -
+0 2 9 14 21 26 32 34 39 40 40 48 51 54 60
+sort time: 0.0043[ms]
+
+=== descending =============================
+[61, 61, 61, 52, 48, 47, 45, 37, 32, 27, 19, 12, 11, 6, 0]
+- BubbleSort -
+0 6 11 12 19 27 32 37 45 47 48 52 61 61 61
+sort time: 0.0135[ms]
+- SelectionSort -
+0 6 11 12 19 27 32 37 45 47 48 52 61 61 61
+sort time: 0.0051[ms]
+- InsertionSort -
+0 6 11 12 19 27 32 37 45 47 48 52 61 61 61
+sort time: 0.013[ms]
+
+=== random     =============================
+[24, 14, 38, 37, 27, 27, 1, 37, 35, 11, 27, 31, 5, 3, 9]
+- BubbleSort -
+1 3 5 9 11 14 24 27 27 27 31 35 37 37 38
+sort time: 0.0086[ms]
+- SelectionSort -
+1 3 5 9 11 14 24 27 27 27 31 35 37 37 38
+sort time: 0.0053[ms]
+- InsertionSort -
+1 3 5 9 11 14 24 27 27 27 31 35 37 37 38
+sort time: 0.0078[ms]
+
+結果4
+G:\programing\java\Lesson20>java Lesson20_4
+=== ascending  =============================
+- BubbleSort -
+sort time: 36.1146[ms]
+compare count: 49995000
+assign count: 0
+sort: true
+- SelectionSort -
+sort time: 40.9926[ms]
+compare count: 49995000
+assign count: 29997
+sort: true
+- InsertionSort -
+sort time: 0.5228[ms]
+compare count: 9999
+assign count: 0
+sort: true
+
+=== descending =============================
+- BubbleSort -
+sort time: 110.8603[ms]
+compare count: 49995000
+assign count: 149981799
+sort: true
+- SelectionSort -
+sort time: 93.205[ms]
+compare count: 49995000
+assign count: 29997
+sort: true
+- InsertionSort -
+sort time: 76.6389[ms]
+compare count: 49994890
+assign count: 149981799
+sort: true
+
+=== random     =============================
+- BubbleSort -
+sort time: 103.1686[ms]
+compare count: 49995000
+assign count: 74758107
+sort: true
+- SelectionSort -
+sort time: 39.2376[ms]
+compare count: 49995000
+assign count: 29997
+sort: true
+- InsertionSort -
+sort time: 41.0948[ms]
+compare count: 24929356
+assign count: 74758107
+sort: true

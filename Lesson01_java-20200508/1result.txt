@@ -1,0 +1,4 @@
+Name: Taro yamada
+Age: 20
+Height: 170.9
+Birth day: 2000/4/1

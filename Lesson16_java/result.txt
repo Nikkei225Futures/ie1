@@ -1,0 +1,353 @@
+課題1-2 プログラム MyStack.java
+public class MyStack {
+    private int maxSize; // スタックの大きさ
+    private Object[] stackArray; // スタックを実現する配列
+    private int stackPointer; // スタックポインタ
+
+    private MyStack() {
+    }
+
+    public MyStack(int size) {
+        this.maxSize = size;
+        this.stackArray = new Object[size];
+        this.stac
+        kPointer = 0; // push時に格納される配列のindex
+    }
+
+    // スタックが空かどうかを判定するメソッド
+    public boolean isEmpty() {
+        return (this.stackPointer == 0);
+    }
+
+    // スタックが一杯かどうかを判定するメソッド
+    public boolean isFull() {
+        return (this.stackPointer == this.maxSize);
+    }
+
+    public Object pop() {
+        if (this.isEmpty()) {
+            // 特にエラーメッセージを表示する場合に使うメソッド（標準エラーストリーム）
+            System.err.println("Stack is Empty.");
+            return null;
+        }
+        this.stackPointer--;
+        Object popObject = this.stackArray[this.stackPointer];
+        this.stackArray[this.stackPointer] = null;
+        return popObject;
+    }
+
+    public void push(Object obj) {
+        if (this.isFull()) {
+            System.err.println("Stack is full.");
+            return;
+        }
+        this.stackArray[this.stackPointer] = obj;
+        this.stackPointer++;
+    }
+
+    public void printAll() {
+        System.out.println("Contents of Stack");
+        int count = 1;
+        int position = this.stackPointer - 1;
+        while (position >= 0) {
+            System.out.println(count + "\t" + this.stackArray[position]);
+            count++;
+            position--;
+        }
+        System.out.println();
+    }
+
+    //課題1
+    public void clear(){
+        while(true){
+            if(this.pop() == null){
+                break;
+            }
+        }
+    }
+
+    public Object peek(){
+        if (this.isEmpty()) {
+            // 特にエラーメッセージを表示する場合に使うメソッド（標準エラーストリーム）
+            System.err.println("Stack is Empty.");
+            return null;
+        }
+        Object peekObj = this.stackArray[this.stackPointer-1];
+        return peekObj;
+    }
+
+    public void printAllReverse() {
+        System.out.println("Contents of Stack");
+        int count = 1;
+        int position = 0;
+        while (position < this.maxSize) {
+            System.out.println(count + "\t" + this.stackArray[position]);
+            count++;
+            position++;
+        }
+        System.out.println();
+    }
+
+    //課題2
+    public boolean exchange(){
+        if(this.stackPointer < 2){
+            System.out.println("The number of elements is less than 2");
+            return false;
+        }else{
+            Object tmp = this.stackArray[this.maxSize-2];
+            this.stackArray[this.maxSize-2] = this.stackArray[this.maxSize-1];
+            this.stackArray[this.maxSize-1] = tmp;
+            return true;
+        }
+
+    }
+
+}
+
+課題3-4 プログラム MyQueue.java
+public class MyQueue {
+    // ----フィールド----
+    private Object[] queueArray; // キューを実現する配列
+    private int head; // キューの先頭を示すインデックス
+    private int tail; // キューの最後を示すインデックス
+    private int maxSize; // キューを実現ずる配列のサイズ
+    private int num; // キューに格納されているオブジェクト数
+    // ----コンストラクタ----
+
+    public MyQueue(int size) {
+        this.queueArray = new Object[size];
+        this.head = 0;
+        this.tail = 0;
+        this.num = 0;
+        this.maxSize = size;
+    }
+
+    private MyQueue() {
+
+    }
+
+    // ----メソッド----
+    // 敢えて，格納された配列のidnexを返すようにしている
+    public int enqueue(Object obj) {
+        // 格納されているオブジェクト数が配列のサイズよりも小さいときだけ追加
+        if (this.num < this.maxSize) {
+            this.queueArray[this.tail] = obj;
+            // キューの最後に追加
+            int oldtail = this.tail;
+            // 配列の最後であれば先頭へ
+            this.tail = (this.tail + 1) % this.maxSize;
+            this.num++;
+            return oldtail; // objが格納されたqueueArrayのindexを返す
+        } else {
+            return -1;// 配列が一杯なら-1を返す
+        }
+
+    }
+
+    public Object dequeue() {
+        // 1個以上のオブジェクトが格納されているときだけ取り出し
+        // isEmpty()メソッドを利用するのも可
+        if (this.num > 0) {
+            Object obj = this.queueArray[head];
+            // 配列の最後であれば先頭へ
+            this.head = (this.head + 1) % this.maxSize;
+            this.num--;
+            return obj;
+        } else {
+            return null;
+        }
+
+    }
+
+    public boolean isEmpty() {
+        return (this.num == 0);
+    }
+
+    public boolean isFull() {
+        return (this.num == this.maxSize);
+    }
+
+    public void printAll() {
+        System.out.println("Contents of Queue");
+        if (!this.isEmpty()) {
+            int position = this.head;
+            for (int i = 0; i < this.num; i++) {
+                position = (this.head + i) % this.maxSize;
+                System.out.println(this.queueArray[position]);
+            }
+        }
+    }
+
+    //課題3
+    public void clear(){
+        while(true){
+            if(this.dequeue() == null){
+                break;
+            }
+        }
+    }
+
+    public Object peek(){
+        if(this.isEmpty()){
+            System.out.println("Queue is Empty");
+            return null;
+        }else{
+            Object peekObj = this.queueArray[head];
+            return peekObj;
+        }
+    }
+
+    public int forceEnqueue(Object obj){
+        if(!this.isFull()){
+            return this.enqueue(obj);
+        }else{
+            this.dequeue();
+            this.queueArray[this.tail] = obj;
+            this.num++;
+            return this.tail;
+        }
+    }
+
+    //課題4
+    public void rotate(int n){
+        if(this.num == 0){
+            return;
+        }
+        for(int i = 0; i < n; i++){
+            Object headObj = this.dequeue();
+            this.enqueue(headObj);
+        }
+    }
+}
+
+課題1　結果
+G:\programing\java\Lesson16_java>java Lesson16_1
+---- MyStack ----
+Contents of Stack
+1       DDD
+2       CCC
+3       BBB
+4       AAA
+
+-- MyStack peek --
+Object at the top: DDD
+Contents of Stack
+1       DDD
+2       CCC
+3       BBB
+4       AAA
+
+-- MyStack printAllReverse --
+Contents of Stack
+1       AAA
+2       BBB
+3       CCC
+4       DDD
+
+-- MyStack clear --
+Stack is Empty.
+Contents of Stack
+
+-- MyStack peek --
+Stack is Empty.
+Object at the top: null
+Contents of Stack
+
+課題2　結果
+G:\programing\java\Lesson16_java>java Lesson16_2
+---- MyStack1 ----
+Contents of Stack
+1       DDD
+2       CCC
+3       BBB
+4       AAA
+
+-- MyStack1 exchange --
+Exchange was successful.
+Contents of Stack
+1       CCC
+2       DDD
+3       BBB
+4       AAA
+
+---- MyStack2 ----
+Contents of Stack
+1       AAA
+
+-- MyStack2 exchange --
+The number of elements is less than 2
+Exchange failed.
+Contents of Stack
+1       AAA
+
+課題3　結果
+G:\programing\java\Lesson16_java>java Lesson16_3
+---- MyQueue ----
+Contents of Queue
+AAA
+BBB
+CCC
+
+-- MyQueue peek --
+Object at the head: AAA
+Contents of Queue
+AAA
+BBB
+CCC
+
+-- MyQueue forceEnqueue --
+Enqueue DDD (position 3)
+Enqueue EEE (position 0)
+Contents of Queue
+BBB
+CCC
+DDD
+EEE
+
+-- MyQueue clear --
+Contents of Queue
+
+-- MyQueue peek --
+Queue is Empty
+Object at the head: null
+Contents of Queue
+
+課題4　結果
+G:\programing\java\Lesson16_java>java Lesson16_4
+---- MyQueue ----
+Contents of Queue
+AAA
+BBB
+CCC
+DDD
+
+-- MyQueue rotate(1) --
+Contents of Queue
+BBB
+CCC
+DDD
+AAA
+
+-- MyQueue rotate(5) --
+Contents of Queue
+CCC
+DDD
+AAA
+BBB
+
+-- MyQueue dequeue --
+Contents of Queue
+DDD
+AAA
+BBB
+
+-- MyQueue rotate(5) --
+Contents of Queue
+BBB
+DDD
+AAA
+
+-- MyQueue clear --
+
+-- MyQueue rotate(2) --
+Contents of Queue

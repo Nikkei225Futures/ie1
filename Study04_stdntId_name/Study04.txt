@@ -1,0 +1,27 @@
+Characterクラスでは、
+メンバにname, hp, atkに加えて、DancerクラスとHeroクラスでHPとATKの初期値を使うためにinitHp, initAtkを加えた。
+また、damageメソッドでは、HPがマイナスにならないように制限を設けた。
+
+Heroクラス以下では、IDを使用するのでstatic変数にgeneretedInstantsを用意してコンストラクタ実行時にIDをカウントするようにした。
+また、HeroクラスのresetStatusメソッドは他クラスでは使わないのでfinalを付けて継承させないようにした。
+
+Enemyクラスでは、attackメソッドとshowStatusメソッドが少し違うのでオーバーライドした。
+
+Member(interface)では、DancerクラスとWarriorクラスのskillメソッドで使う定数を用意した。
+
+Dancer, Priest, Warriorクラスでは、
+コンストラクタは親クラスのコンストラクタを呼び出して使用し、
+skillメソッドのみを実装することで、コードを短くすることが出来た。
+
+Study04.javaでは、
+多態性を意識して、各クラスのインスタンスをCharacterクラスにアップキャストして配列に格納した。
+そして、攻撃する順番に配列に格納することでコードを短くすることが出来た。
+また、入力でInputMismatchExceptionが発生する可能性があったので例外処理を加えた。
+また、battle, isHpRemain, getPartyメソッドを実装した。
+battleメソッドで、各クラスに応じた行動を取ることができ、isHpRemainで各キャラクターのHPが残っているかをチェックして戦闘を終了するかどうかを決定した。
+戦闘を終了する条件は、パーティーが全滅したときか、敵が倒れたときにした。
+また、getPartyメソッドを実装することで、仲間が何人でもプログラムが動くようにした。
+具体的には、任意の大きさの配列(Character charasOnField[])のcharasOnField[3]以降にも仲間を配置することができるようになった。
+
+また、全体的にコメントアウトを付けて分かりやすくした。
+また、Characterクラスは66sloc、それ以下は12~21sloc程度にまとめることが出来たが、Study04クラスは149slocと長くなってしまった。

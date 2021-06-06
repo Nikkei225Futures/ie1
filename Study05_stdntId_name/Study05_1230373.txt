@@ -1,0 +1,15 @@
+インデントがおかしいので修正
+mainとsolverを分割してSudokuSolverMain.java, SudokuSolverに分割した
+また、solverクラスは長いのでSudokuSolverMethodsクラスを作り、更に分割した。
+SudokuSolverクラスでは大まかな処理の流れが分かるようにし、
+SudokuSolverMethodsクラスからメソッドを呼び出すことによりコードの可読性を上げることにした。
+SudokuSolverMethodsクラスでは、
+drawCurrentBoardメソッドで現在の数独の状況を出力、
+renewPossibleRCメソッドで行と列のpossibleの更新をまとめて記述、
+printFixingResultメソッドで修正の状況を出力、
+createBlockメソッドで数独のブロック内での処理で使うCellの配列を作成、
+findUndecidedCellメソッドで未定のマスを探索、
+tempFixingメソッドで仮置きし、再帰呼び出しにより数独を解いている。
+
+また、各クラスの変数はpublicになっていたので、それぞれgetter/setterを追加してカプセル化の考えに沿うようにした。
+この結果、若干コードの可読性が上がった。

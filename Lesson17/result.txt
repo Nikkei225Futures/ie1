@@ -1,0 +1,206 @@
+課題1-4 プログラム BinarySearchTree.java
+public class BinarySearchTree {
+    // フィールド
+    private MyNode root;
+    private int numOfNodes = 0;
+
+    // コンストラクタ
+    public BinarySearchTree() {
+        this.root = null;
+    }
+
+    // メソッド
+    public void insert(MyData aData) {
+        numOfNodes++;
+        MyNode newNode = new MyNode(aData);
+        if (null == this.root) {
+            this.root = newNode;
+            return;
+        }
+        MyNode currentNode = this.root;
+        while (true) {
+            if (currentNode.getData().compareTo(aData) > 0) {
+                if (currentNode.getLeft() == null) {
+                    currentNode.setLeft(newNode);
+                    return;
+                }
+                currentNode = currentNode.getLeft();
+            } else {
+                if (currentNode.getRight() == null) {
+                    currentNode.setRight(newNode);
+                    return;
+                }
+                currentNode = currentNode.getRight();
+            }
+        }
+    }
+
+    // 動作確認用
+    public void printRoot() {
+        // ルートノードを表示
+        System.out.println(this.root);
+        // ルートノードの左の子ノードを表示
+        System.out.println(this.root.getLeft());
+        // ルートノードの右の子ノードを表示
+        System.out.println(this.root.getRight());
+    }
+
+    //課題1
+    public MyData getMaximumData(){
+        if(this.root == null){
+            return null;
+        }
+        MyNode currentNode = this.root;
+        while(currentNode.getRight() != null){
+            currentNode = currentNode.getRight();
+        }
+        return currentNode.getData();
+    }
+
+    public MyData getMinimumData(){
+        if(this.root == null){
+            return null;
+        }
+        MyNode currentNode = this.root;
+        while(currentNode.getLeft() != null) {
+            currentNode = currentNode.getLeft();
+        }
+        return currentNode.getData();
+    }
+
+    //課題2
+    public int getNumOfNodes(){
+        return this.numOfNodes;
+    }
+
+    public int countNodes(MyNode currentNode){
+        if(currentNode == null){
+            return 0;
+        }else if(currentNode != null){
+            return 1;
+        }
+        return this.countNodes(currentNode.getLeft()) + this.countNodes(currentNode.getRight());
+    }
+
+    //課題3
+    public int getHeight(){
+        return this.getNodeHeight(this.root);
+    }
+
+    private int getNodeHeight(MyNode currentNode){
+        if(currentNode == null){
+            return 0;
+        }
+        int right = getNodeHeight(currentNode.getRight());
+        int left  = getNodeHeight(currentNode.getLeft());
+        if(right < left){
+            return left + 1;
+        }else{
+            return right + 1;
+        }
+    }
+
+    //課題4
+    public void showTree(){
+        System.out.println(this.showSubTree(this.root, 0));
+    }
+
+    public String showSubTree(MyNode localNode, int counter){
+        if(localNode == null){
+            return "";
+        }
+        
+        StringBuffer buf = new StringBuffer();
+        if(localNode != null){
+            String str = this.align(counter) + counter + ":" + localNode.getData().toString();
+            buf.append(str + "\n");
+        }
+
+        buf.append(showSubTree(localNode.getLeft(), counter + 1));
+        buf.append(showSubTree(localNode.getRight(), counter + 1));
+        
+        return buf.toString();
+        
+    }
+
+    private String align(int counter){
+        String ret = "";
+        for(int i = 0; i < counter; i++){
+            ret += "   ";
+        }
+        return ret;
+    }
+
+}
+
+課題1 結果
+G:\programing\java\Lesson17>java Lesson17_1
+Maximum Data: null
+Minimum Data: null
+
+Insert: (35, lemon)
+
+Maximum Data: (35, lemon)
+Minimum Data: (35, lemon)
+
+Insert: (17, apple)
+Insert: (69, orange)
+Insert: (21, banana)
+Insert: (38, cherry)
+
+Maximum Data: (69, orange)
+Minimum Data: (17, apple)
+
+課題2 結果
+G:\programing\java\Lesson17>java Lesson17_2
+Num: 0
+
+Insert: (35, lemon)
+
+Num: 1
+
+Insert: (17, apple)
+Insert: (69, orange)
+Insert: (21, banana)
+Insert: (38, cherry)
+
+Num: 5
+
+課題3 結果
+G:\programing\java\Lesson17>java Lesson17_3
+Height: 0
+
+Insert: (35, lemon)
+
+Height: 1
+
+Insert: (17, apple)
+Insert: (69, orange)
+Insert: (21, banana)
+Insert: (38, cherry)
+
+Height: 3
+
+Insert: (75, peach)
+Insert: (79, grape)
+
+Height: 4
+
+課題4 結果
+G:\programing\java\Lesson17>java Lesson17_4
+Insert: (35, lemon)
+Insert: (17, apple)
+Insert: (69, orange)
+Insert: (21, banana)
+Insert: (38, cherry)
+Insert: (75, peach)
+Insert: (79, grape)
+
+========== Binary Search Tree ==========
+0:(35, lemon)
+   1:(17, apple)
+      2:(21, banana)
+   1:(69, orange)
+      2:(38, cherry)
+      2:(75, peach)
+         3:(79, grape)

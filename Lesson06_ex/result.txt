@@ -1,0 +1,323 @@
+課題1 Book.java
+public class Book {
+	private String title;
+	private String author;
+	private int price;
+	
+	// add here(Lesson06_2)
+
+	Book() {
+		// add here(Lesson06_1)
+		this.title = "情報学群実験第1";
+		this.author = "工科大介";
+		this.price = 0;
+		// add here(Lesson06_2)
+	}
+	
+	void printData() {
+		// add here(Lesson06_2)
+                
+		// add here(Lesson06_1)
+			System.out.println("書籍名: " + this.title);
+			System.out.println("著者: " + this.author);
+			System.out.println("価格: " + this.price + "円");
+        }
+
+	Book(String title, String author, int price) {
+        	// add here(Lesson06_2)
+	}
+	
+	public static int getCount() {
+		// add here(Lesson06_2)
+		return 0;    //Book.java:32 エラー: 不適合な型: 戻り値がありませんのため、return 0;を追加
+	}
+	
+	// add here(Lesson06_3)
+
+}
+
+課題1 結果
+G:\programing\java\Lesson06_ex>java Lesson06_1
+書籍名: 情報学群実験第1
+著者: 工科大介
+価格: 0円
+
+課題2 Lesson06_2.java
+public class Lesson06_2 {
+	public static void main(String[] args) {
+		Book book1 = new Book();
+		Book book2 = new Book("教育情報工学とは", "妻鳥貴彦先生", 1230);
+
+		// add here
+		book1.printData();
+		book2.printData();
+		System.out.println("生成されたインスタンス: " + Book.getCount());
+	}
+}
+
+
+
+課題2 Book.java
+public class Book {
+	private String title;
+	private String author;
+	private int price;
+	private int id;
+	private static int count = 0;
+	
+	// add here(Lesson06_2)
+
+	Book() {
+		// add here(Lesson06_1)
+		this.title = "情報学群実験第1";
+		this.author = "工科大介";
+		this.price = 0;
+		// add here(Lesson06_2)
+	}
+	
+	void printData() {
+		// add here(Lesson06_2)
+                
+		// add here(Lesson06_1)
+		System.out.println("ID: " + this.id);
+		System.out.println("書籍名: " + this.title);
+		System.out.println("著者: " + this.author);
+		System.out.println("価格: " + this.price + "円");
+		System.out.println("----------");
+    }
+
+	Book(String title, String author, int price) {
+		// add here(Lesson06_2)
+		this.title = title;
+		this.author = author;
+		this.price = price;
+		this.id = getCount();
+	}
+	
+	public static int getCount() {
+		// add here(Lesson06_2)
+		Book.count++;
+		return Book.count;
+	}
+	
+	// add here(Lesson06_3)
+
+}
+
+課題2 結果
+G:\programing\java\Lesson06_ex>java Lesson06_2
+ID: 0
+書籍名: 情報学群実験第1
+著者: 工科大介
+価格: 0円
+----------
+ID: 1
+書籍名: 教育情報工学とは
+著者: 妻鳥貴彦先生
+価格: 1230円
+----------
+生成されたインスタンス: 2
+
+
+
+課題3　Lesson06_3.java
+public class Lesson06_3 {
+	public static void main(String[] args) {
+		Book book = new Book();
+
+		// add here
+		System.out.println("書籍名: " + book.getTitle());
+		System.out.println("著者: " + book.getAuthor());
+	}	
+}
+
+課題3 Book.java
+public class Book {
+	private String title;
+	private String author;
+	private int price;
+	private int id;
+	private static int count = 0;
+	
+	// add here(Lesson06_2)
+
+	Book() {
+		// add here(Lesson06_1)
+		this.setTitle("ゲーム情報学とは");
+		this.setAuthor("竹内聖悟先生");
+		// add here(Lesson06_2)
+	}
+	
+	void printData() {
+		// add here(Lesson06_2)
+                
+		// add here(Lesson06_1)
+		System.out.println("ID: " + this.id);
+		System.out.println("書籍名: " + this.title);
+		System.out.println("著者: " + this.author);
+		System.out.println("価格: " + this.price + "円");
+		System.out.println("----------");
+    }
+
+	Book(String title, String author, int price) {
+		// add here(Lesson06_2)
+		this.title = title;
+		this.author = author;
+		this.price = price;
+		this.id = getCount();
+	}
+	
+	public static int getCount() {
+		// add here(Lesson06_2)
+		Book.count++;
+		return Book.count;
+	}
+	
+	// add here(Lesson06_3)
+	
+	public void setTitle(String title){
+		this.title = title;
+	}
+
+	public String getTitle(){
+		return this.title;
+	}
+
+	public void setAuthor(String author){
+		this.author = author;
+	}
+
+	public String getAuthor(){
+		return this.author;
+	}
+
+	public void setPrice(int price){
+		this.price = price;
+	}
+
+	public int getPrice(){
+		return this.price;
+	}
+}
+
+課題3 結果
+G:\programing\java\Lesson06_ex>java Lesson06_3
+書籍名: ゲーム情報学とは
+著者: 竹内聖悟先生
+
+
+
+課題4　Lesson06_4.java
+public class Lesson06_4 {
+	public static void main(String[] args) {
+		Book book1 = new Book("スッキリわかるJava入門", "中山きよたか", 3500);
+		Book book2 = new Book("入門bash", "キャメロン・ニューハム", 3000);
+		Book book3 = new Book("詳解シェルスクリプト", "ネルソン・H.F.ベーブ", 3200);
+		
+		// add here
+		Store store = new Store(50000);
+		store.purchase(book3);
+		store.getMoney();
+		store.sell(book1);
+		store.getMoney();
+		store.sell(book2);
+		store.getMoney();
+	}
+}
+
+課題4 Book.javaは課題2のBook.javaと同じです。
+
+課題4 Store.java
+public class Store {
+    private int money;
+
+    public void purchase(Book book){
+        System.out.println("「" + book.getTitle() + "」" + "を仕入れました");
+        money -= book.getPrice()*0.8;
+    }
+
+    public void sell(Book book){
+        System.out.println("「" + book.getTitle() + "」" + "を売りました");
+        money += book.getPrice();
+    }
+
+    public int getMoney(){
+        System.out.println("今のStoreの所持金は" + this.money + "円です");
+        return this.money;
+    }
+
+    public Store(int money){
+        this.money = money;
+    }
+
+}
+
+課題4　結果
+G:\programing\java\Lesson06_ex>java Lesson06_4
+「詳解シェルスクリプト」を仕入れました
+今のStoreの所持金は47440円です
+「スッキリわかるJava入門」を売りました
+今のStoreの所持金は50940円です
+「入門bash」を売りました
+今のStoreの所持金は53940円です
+
+
+
+課題5 Lesson06_5.java
+public class Lesson06_5 {
+	public static void main(String[] args) {
+		Hero h = new Hero();
+		
+		//h.setName("工科大介");
+		//h.setLevel(50);
+		//h.setName("");
+		//h.setLevel(50);
+		//h.setName("ルイス・イ・ピカソ");
+        //h.setLevel(100);
+		h.setName("工科大介");
+        h.setLevel(5000);
+		
+		System.out.println("勇者「" + h.getName() + "」のレベルは" + h.getLevel() + "です");
+	}
+}
+
+課題5 Hero.java
+class Hero {
+	private String name;
+	private int level;
+
+	// add here	
+	Hero(){
+		this.setName("ヒーロー");
+		this.setLevel(0);
+	}
+
+	
+	void setName(String name) {
+		// add here
+		if(name.length() >= 1 && name.length() <= 8){
+			this.name = name;
+		}
+	}
+
+	void setLevel(int level) {
+		// add here
+		if(level >= 0 && level <= 100){
+			this.level = level;
+		}
+	}
+
+	String getName() {
+		// add here
+		return this.name;
+	}
+
+	int getLevel() {
+		// add here
+		return this.level;
+	}
+}
+
+課題5　結果
+G:\programing\java\Lesson06_ex>java Lesson06_5
+勇者「工科大介」のレベルは0です

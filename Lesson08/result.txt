@@ -1,0 +1,440 @@
+課題1 プログラム 
+Lesson08_1.java
+public class Lesson08_1 {
+	public static void main(String[] args) {
+		HyperLottery sr = new HyperLottery();
+		sr.draw();
+	}
+}
+
+Lottery.java
+public class Lottery {
+	public void draw() {
+		int rnd = new java.util.Random().nextInt(100);
+		if(rnd < 2) {
+			System.out.println("１等！！！");
+		} else if (2 <= rnd && rnd < 22) {
+			System.out.println("２等！！");
+		} else if (22 <= rnd && rnd < 52) {
+			System.out.println("３等！");
+		} else {
+			System.out.println("４等");
+		}
+	}
+}
+
+HyperLottery.java
+public class HyperLottery extends Lottery{
+	public void draw() {
+		super.draw();
+		int luckyRnd = new java.util.Random().nextInt(100);
+		if(luckyRnd < 50) {
+			super.draw();
+		}
+	}
+}
+
+課題1　結果
+G:\programing\java\Lesson08>java Lesson08_1
+３等！
+
+G:\programing\java\Lesson08>java Lesson08_1
+４等
+３等！
+
+G:\programing\java\Lesson08>java Lesson08_1
+２等！！
+
+G:\programing\java\Lesson08>java Lesson08_1
+４等
+４等
+
+G:\programing\java\Lesson08>java Lesson08_1
+３等！
+３等！
+
+
+課題2　プログラム
+Lesson08_2.java
+public class Lesson08_2 {
+  public static void main(String[] args) {
+    Printer printer = new Printer();
+    printer.start();
+    System.out.println("=====");
+    printer.printInfo();
+    System.out.println("=====");
+    printer.stop();
+    System.out.println("=====");
+    printer.printInfo();
+    System.out.println("=====");
+  }
+}
+
+Machine.java
+public class Machine {
+  protected boolean power;
+  protected int battery;
+
+  public Machine() {
+    power = false;
+    battery = 100;
+  }
+
+  public Machine(int battery) {
+    power = false;
+    this.battery = battery;
+  }
+
+  public void start() {
+    power = true;
+  }
+
+  public void stop() {
+    power = false;
+  }
+
+  public void printInfo() {
+    if (power == true) {
+      System.out.println("電源: ON");
+    } else {
+      System.out.println("電源: OFF");
+    }
+    System.out.println("バッテリー残量:" + battery);
+  }
+}
+
+Printer.java
+public class Printer extends Machine {
+  protected int paper;
+  protected int ink;
+
+  public Printer() {
+    paper = 100;
+    ink = 100;
+  }
+
+  /* --- Lesson08_3 ここから --- */
+
+  /* --- Lesson08_3 ここまで --- */
+
+
+  /* --- Lesson08_4 ここから --- */
+
+  /* --- Lesson08_4 ここまで --- */
+
+
+  /* --- Lesson08_2 ここから --- */
+    public void printInfo(){
+        super.printInfo();
+        System.out.println("用紙残量:" + this.paper);
+        System.out.println("バッテリー残量:" + this.ink);
+    }
+  /* --- Lesson08_2 ここまで --- */
+}
+
+課題2　結果
+G:\programing\java\Lesson08>java Lesson08_2
+=====
+電源: ON
+バッテリー残量:100
+用紙残量:100
+バッテリー残量:100
+=====
+=====
+電源: OFF
+バッテリー残量:100
+用紙残量:100
+バッテリー残量:100
+=====
+
+
+課題3　プログラム
+Lesson08_3.java
+public class Lesson08_3 {
+  public static void main(String[] args) {
+    Printer printer1 = new Printer(50, 25);
+    printer1.start();
+    System.out.println("=====");
+    printer1.printInfo();
+    System.out.println("=====");
+    printer1.stop();
+
+    Printer printer2 = new Printer(75, 50, 25);
+    printer2.start();
+    System.out.println("=====");
+    printer2.printInfo();
+    System.out.println("=====");
+    printer2.stop();
+  }
+}
+
+Machine.javaは課題2と同じです
+
+Printer.java
+public class Printer extends Machine {
+  protected int paper;
+  protected int ink;
+
+  public Printer() {
+    paper = 100;
+    ink = 100;
+  }
+
+  /* --- Lesson08_3 ここから --- */
+  public Printer(int paper, int ink){
+    this.paper = paper;
+    this.ink = ink;
+  }
+
+  public Printer(int battery, int paper, int ink){
+    this(paper, ink);
+    this.battery = battery;
+  }
+  /* --- Lesson08_3 ここまで --- */
+
+
+  /* --- Lesson08_4 ここから --- */
+
+  /* --- Lesson08_4 ここまで --- */
+
+
+  /* --- Lesson08_2 ここから --- */
+  public void printInfo(){
+    super.printInfo();
+    System.out.println("用紙残量:" + this.paper);
+    System.out.println("バッテリー残量:" + this.ink);
+  }
+  /* --- Lesson08_2 ここまで --- */
+}
+
+課題3　結果
+G:\programing\java\Lesson08>java Lesson08_3
+=====
+電源: ON
+バッテリー残量:100
+用紙残量:50
+バッテリー残量:25
+=====
+=====
+電源: ON
+バッテリー残量:75
+用紙残量:50
+バッテリー残量:25
+=====
+
+課題4プログラム
+Lesson08_4.java
+public class Lesson08_4 {
+  public static void main(String[] args) {
+    Printer printer = new Printer(100, 100, 100);
+    printer.start();
+    System.out.println("=====");
+    printer.printInfo();
+    System.out.println("=====");
+
+    printer.print();
+    System.out.println("=====");
+    printer.printInfo();
+    System.out.println("=====");
+
+    printer.printColor();
+    System.out.println("=====");
+    printer.printInfo();
+    System.out.println("=====");
+
+    printer.printColor();
+
+    printer.stop();
+    System.out.println("=====");
+    printer.printInfo();
+    System.out.println("=====");
+  }
+}
+
+Machine.javaは課題2と同じです
+
+Printer.java
+public class Printer extends Machine {
+  protected int paper;
+  protected int ink;
+
+  public Printer() {
+    paper = 100;
+    ink = 100;
+  }
+
+  /* --- Lesson08_3 ここから --- */
+  public Printer(int paper, int ink){
+    this.paper = paper;
+    this.ink = ink;
+  }
+
+  public Printer(int battery, int paper, int ink){
+    this(paper, ink);
+    this.battery = battery;
+  }
+  /* --- Lesson08_3 ここまで --- */
+
+
+  /* --- Lesson08_4 ここから --- */
+  public void print(){
+    if(this.battery-10 < 0 || this.paper-10< 0 || this.ink-10 < 0){
+      System.out.println("プリントに失敗しました.");
+    }else{
+      this.battery-=10;
+      this.paper-=10;
+      this.ink-=10;
+      System.out.println("プリントに成功しました.");
+    }
+  }
+
+  public void printColor(){
+    if(this.battery-10 < 0 || this.paper-10< 0 || this.ink-50 < 0){
+      System.out.println("カラープリントに失敗しました.");
+    }else{
+      this.battery-=10;
+      this.paper-=10;
+      this.ink-=50;
+      System.out.println("カラープリントに成功しました.");
+    }
+  }
+
+  /* --- Lesson08_4 ここまで --- */
+
+
+  /* --- Lesson08_2 ここから --- */
+  public void printInfo(){
+    super.printInfo();
+    System.out.println("用紙残量:" + this.paper);
+    System.out.println("バッテリー残量:" + this.ink);
+  }
+  /* --- Lesson08_2 ここまで --- */
+}
+
+
+課題4結果
+G:\programing\java\Lesson08>java Lesson08_4
+=====
+電源: ON
+バッテリー残量:100
+用紙残量:100
+バッテリー残量:100
+=====
+プリントに成功しました.
+=====
+電源: ON
+バッテリー残量:90
+用紙残量:90
+バッテリー残量:90
+=====
+カラープリントに成功しました.
+=====
+電源: ON
+バッテリー残量:80
+用紙残量:80
+バッテリー残量:40
+=====
+カラープリントに失敗しました.
+=====
+電源: OFF
+バッテリー残量:80
+用紙残量:80
+バッテリー残量:40
+=====
+
+
+課題5　プログラム
+Lesson08_5.java
+public class Lesson08_5 {
+  public static void main(String[] args) {
+    ImprovedPrinter iPrinter = new ImprovedPrinter(50, 50, 50);
+    iPrinter.start();
+    System.out.println("=====");
+    iPrinter.printInfo();
+    System.out.println("=====");
+
+    iPrinter.print();  
+    System.out.println("=====");
+    iPrinter.printInfo();
+    System.out.println("=====");
+
+    iPrinter.printColor();
+    System.out.println("=====");
+    iPrinter.printInfo();
+    System.out.println("=====");
+
+    iPrinter.printColor();
+    iPrinter.stop();
+    System.out.println("=====");
+    iPrinter.printInfo();
+    System.out.println("=====");
+    
+  }
+}
+
+Machine.javaとPrinter.java は課題4と同じです
+
+ImprovedPrinter.java
+public class ImprovedPrinter extends Printer {
+	/* --- Lesson08_5 ここから --- */
+	public ImprovedPrinter(int paper, int ink){
+   super(paper, ink);
+  }
+
+  public ImprovedPrinter(int battery, int paper, int ink){
+    super(battery, paper, ink);
+  }
+
+  public void print(){
+    this.battery *= 10;
+    this.paper *= 10;
+    this.ink *= 10;
+    super.print();
+    this.battery /= 10;
+    this.paper /= 10;
+    this.ink /= 10;
+  }
+  
+  public void printColor(){
+    this.battery *= 10;
+    this.paper *= 10;
+    this.ink *= 10;
+    super.printColor();
+    this.battery /= 10;
+    this.paper /= 10;
+    this.ink /= 10;
+  }
+
+  /* --- Lesson08_5 ここまで --- */
+}
+
+課題5結果
+G:\programing\java\Lesson08>java Lesson08_5
+=====
+電源: ON
+バッテリー残量:50
+用紙残量:50
+バッテリー残量:50
+=====
+プリントに成功しました.
+=====
+電源: ON
+バッテリー残量:49
+用紙残量:49
+バッテリー残量:49
+=====
+カラープリントに成功しました.
+=====
+電源: ON
+バッテリー残量:48
+用紙残量:48
+バッテリー残量:44
+=====
+カラープリントに成功しました.
+=====
+電源: OFF
+バッテリー残量:47
+用紙残量:47
+バッテリー残量:39
+=====
+

@@ -1,0 +1,31 @@
+Insert: (40, A)
+Insert: (24, B)
+Insert: (15, C)
+Insert: (33, D)
+Insert: (36, E)
+Insert: (20, F)
+Insert: (9, G)
+Insert: (60, H)
+Insert: (52, I)
+Insert: (55, J)
+Insert: (70, K)
+Insert: (73, L)
+Insert: (85, M)
+
+
+===== traverse in-order =====
+(9, G)
+(15, C)
+(20, F)
+(24, B)
+(33, D)
+(36, E)
+(40, A)
+(52, I)
+(55, J)
+(60, H)
+(70, K)
+(73, L)
+(85, M)
+
+===== traverse pre-order =====

@@ -1,0 +1,228 @@
+課題1　プログラム
+Hero.java
+public class Hero extends Character {
+    //-------フィールド-------
+    //add here
+    private int atk;
+    //-------コンストラクタ-------
+    //add here
+    public Hero(String name, int hp, int atk){
+        super(name, hp);
+        this.atk = atk;
+    }
+    //-------メソッド-------
+    //add here
+    public int getAtk(){
+        return this.atk;
+    }
+
+    public void attack(Enemy enemy){
+        System.out.println(this.getName() + "の攻撃!");
+        System.out.println(this.getName() + "は" + enemy.getName() + "に" + this.atk + "のダメージを与えた!");
+    }
+
+    public void printName(){
+        System.out.println("プレイヤーのキャラクターは" + this.getName() + "だ!");
+    }
+
+}
+
+Enemy.java
+public class Enemy extends Character{
+    //-------フィールド-------
+    //add here
+    private int atk;
+    //-------コンストラクタ-------
+    //add here
+    public Enemy(String name, int hp, int atk){
+        super(name, hp);
+        this.atk = atk;
+    }
+    //-------メソッド-------
+    //add here
+    public int getAtk(){
+        return this.atk;
+    }
+
+    public void attack(Hero hero){
+        System.out.println(this.getName() + "の攻撃!");
+        System.out.println(this.getName() + "は" + hero.getName() + "に" + this.atk + "のダメージを与えた!");
+    }
+
+    public void printName(){
+         System.out.println("敵のプレイヤーのキャラクターは" + this.getName() + "だ!");
+    }
+    
+}
+
+課題1　結果
+G:\programing\java\Lesson09>java Lesson09_1
+G:\programing\java\Lesson09>java Lesson09_1
+プレイヤーのキャラクターは勇者だ!
+敵のプレイヤーのキャラクターはスライムだ!
+勇者の攻撃!
+勇者はスライムに16のダメージを与えた!
+
+課題2 プログラム
+Hero.java
+public class Hero extends Character implements CharInfo{
+    //-------フィールド-------
+    //add here
+    private int atk;
+    private int hp;
+    //-------コンストラクタ-------
+    //add here
+    public Hero(String name, int hp, int atk){
+        super(name, hp);
+        this.atk = atk;
+        this.hp = hp;
+    }
+    //-------メソッド-------
+    //add here
+    public int getAtk(){
+        return this.atk;
+    }
+
+    public void attack(Enemy enemy){
+        System.out.println(this.getName() + "の攻撃!");
+        System.out.println(this.getName() + "は" + enemy.getName() + "に" + this.atk + "のダメージを与えた!");
+        enemy.cutHp(this.atk);
+    }
+
+    public void printName(){
+        System.out.println("プレイヤーのキャラクターは" + this.getName() + "だ!");
+    }
+    
+    public void showStatus(){
+        System.out.println("HP: " + this.getHp());
+        System.out.println("ATK: " + this.getAtk());
+    }
+    
+    public void cutHp(int atk){
+        this.hp -= atk;
+        System.out.println(this.getName() + "の残りHPは" + this.hp);
+    }
+}
+
+Enemy.java
+public class Enemy extends Character implements CharInfo{
+    //-------フィールド-------
+    //add here
+    private int atk;
+    private int hp;
+    //-------コンストラクタ-------
+    //add here
+    public Enemy(String name, int hp, int atk){
+        super(name, hp);
+        this.atk = atk;
+        this.hp = hp;
+    }
+    //-------メソッド-------
+    //add here
+    public int getAtk(){
+        return this.atk;
+    }
+
+    public void attack(Hero hero){
+        System.out.println(this.getName() + "の攻撃!");
+        System.out.println(this.getName() + "は" + hero.getName() + "に" + this.atk + "のダメージを与えた!");
+        hero.cutHp(this.atk);
+    }
+
+    public void printName(){
+        System.out.println("敵のプレイヤーのキャラクターは" + this.getName() + "だ!");
+    }
+    
+    public void showStatus(){
+        System.out.println("HP: " + this.getHp());
+        System.out.println("ATK: " + this.getAtk());
+    }
+
+    public void cutHp(int atk){
+        this.hp -= atk;
+        System.out.println(this.getName() + "の残りHPは" + this.hp);
+    }
+}
+
+課題2　結果
+G:\programing\java\Lesson09>java Lesson09_2
+プレイヤーのキャラクターは勇者だ!
+HP: 100
+ATK: 16
+敵のプレイヤーのキャラクターはスライムだ!
+HP: 50
+ATK: 5
+勇者の攻撃!
+勇者はスライムに16のダメージを与えた!
+スライムの残りHPは34
+
+
+課題3　プログラム
+Critical.java
+public interface Critical {
+    //add here
+    int CRITICAL = 2;
+    default int calcCritical(int atk){
+        return atk * CRITICAL;
+    }
+}
+
+Hero.java
+public class Hero extends Character implements CharInfo, Critical{
+    //-------フィールド-------
+    //add here
+    private int atk;
+    private int hp;
+    //-------コンストラクタ-------
+    //add here
+    public Hero(String name, int hp, int atk){
+        super(name, hp);
+        this.atk = atk;
+        this.hp = hp;
+    }
+    //-------メソッド-------
+    //add here
+    public int getAtk(){
+        return this.atk;
+    }
+
+    public void attack(Enemy enemy){
+        System.out.println(this.getName() + "の攻撃!");
+        System.out.println(this.getName() + "は" + enemy.getName() + "に" + this.atk + "のダメージを与えた!");
+        enemy.cutHp(this.atk);
+    }
+
+    public void criticalAttack(Enemy enemy){
+        System.out.println(this.getName() + "の攻撃!");
+        System.out.println("クリティカルヒット!");
+        System.out.println(this.getName() + "は" + enemy.getName() + "に" + calcCritical(this.atk) + "のダメージを与えた!");
+        enemy.cutHp(calcCritical(this.atk));
+    }
+
+    public void printName(){
+        System.out.println("プレイヤーのキャラクターは" + this.getName() + "だ!");
+    }
+    
+    public void showStatus(){
+        System.out.println("HP: " + this.getHp());
+        System.out.println("ATK: " + this.getAtk());
+    }
+    
+    public void cutHp(int atk){
+        this.hp -= atk;
+        System.out.println(this.getName() + "の残りHPは" + this.hp);
+    }
+}
+
+課題3　結果
+G:\programing\java\Lesson09>java Lesson09_3
+プレイヤーのキャラクターは勇者だ!
+HP: 100
+ATK: 16
+敵のプレイヤーのキャラクターはスライムだ!
+HP: 50
+ATK: 5
+勇者の攻撃!
+クリティカルヒット!
+勇者はスライムに32のダメージを与えた!
+スライムの残りHPは18

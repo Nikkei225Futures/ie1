@@ -1,0 +1,177 @@
+プログラム1
+public class Lesson03_1 {
+    public static void main(String[] args) {
+        int n = Integer.parseInt(args[0]);
+        for(int i = 1; i <= n; i++){
+            out(i);
+            System.out.println("");
+        }
+    }
+    
+    public static void out(int n){
+        for(int j = 0; j < n; j++){
+            System.out.print("*");
+        }
+    }
+    
+}
+
+結果1
+G:\programing\java\Lesson03\Lesson03>java Lesson03_1 4
+*
+**
+***
+****
+
+プログラム2
+public class Lesson03_2 {
+
+    public static void main(String[] args) {
+        int n = 0;
+        java.util.Scanner scan = new java.util.Scanner(System.in);
+
+        while (true) {
+            // add here
+            System.out.print("数値を入力してください: ");
+            int x = scan.nextInt();
+            // add here
+            if(x == 0){
+                break;
+            }
+            n += x;
+            System.out.println(n);
+        }
+    }
+}
+
+結果2
+G:\programing\java\Lesson03\Lesson03>java Lesson03_2
+数値を入力してください: 1
+1
+数値を入力してください: 2
+3
+数値を入力してください: 3
+6
+数値を入力してください: 4
+10
+数値を入力してください: 5
+15
+数値を入力してください: 0
+
+プログラム3
+public class Lesson03_3 {
+    
+    public static void main(String[] args) {
+        
+        System.out.print("数値を入力してください: ");
+        int n = new java.util.Scanner(System.in).nextInt();
+        long fib[] = new long[n+1];
+        fib[0] = 0;
+        if(n != 0){
+            fib[1] = 1;   
+        }
+        for(int i = 2; i <= n; i++){
+            fib[i] = fib[i-1] + fib[i-2];
+        }
+        System.out.println(n + "番目のフィボナッチ数は" + fib[n] + "です。");
+    }
+}
+
+
+
+結果3
+G:\programing\java\Lesson03\Lesson03>java Lesson03_3
+数値を入力してください: 0
+0番目のフィボナッチ数は0です。
+
+G:\programing\java\Lesson03\Lesson03>java Lesson03_3
+数値を入力してください: 1
+1番目のフィボナッチ数は1です。
+
+G:\programing\java\Lesson03\Lesson03>java Lesson03_3
+数値を入力してください: 10
+10番目のフィボナッチ数は55です。
+
+プログラム4
+public class Lesson03_4 {
+    
+    static boolean isPrime(int n) {
+        // add here
+        if(n == 1){
+            return false;
+        }
+        for(int i = 2; i < n; i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.print("数値を入力してください: ");
+        int n = new java.util.Scanner(System.in).nextInt();
+        if (isPrime(n)) {
+            System.out.println(n + "は素数です");
+        } else {
+            System.out.println(n + "は素数ではありません");
+        }
+    }
+
+}
+
+結果4
+G:\programing\java\Lesson03\Lesson03>java Lesson03_4
+数値を入力してください: 1
+1は素数ではありません
+
+G:\programing\java\Lesson03\Lesson03>java Lesson03_4
+数値を入力してください: 13
+13は素数です
+
+G:\programing\java\Lesson03\Lesson03>java Lesson03_4
+数値を入力してください: 170
+170は素数ではありません
+
+プログラム5
+public class Lesson03_5 {
+    
+    static int countPrime(int n) {
+        // add here
+        int numberOfPrimes = 0;
+        for(int i = 2; i <= n; i++){
+            if(isPrime(i)){
+                numberOfPrimes++;
+            }
+        }
+        return numberOfPrimes;
+    }
+
+    static boolean isPrime(int n) {
+        for(int i = 2; i < n; i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+		System.out.print("数値を入力してください: ");
+		int n = new java.util.Scanner(System.in).nextInt();
+        System.out.println(n + "以下に素数は" + countPrime(n) + "個あります．");
+    }
+}
+
+結果5
+G:\programing\java\Lesson03\Lesson03>java Lesson03_5
+数値を入力してください: 5
+5以下に素数は3個あります．
+
+G:\programing\java\Lesson03\Lesson03>java Lesson03_5
+数値を入力してください: 7
+7以下に素数は4個あります．
+
+G:\programing\java\Lesson03\Lesson03>java Lesson03_5
+数値を入力してください: 542
+542以下に素数は100個あります．
